@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getAdminUsage } from "@/lib/usage";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
   const rows = await getAdminUsage();
 
