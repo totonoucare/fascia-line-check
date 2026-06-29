@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { ResultCard } from "@/components/ResultCard";
+import { defaultClinic } from "@/lib/defaultClinic";
+import { scoreAnswers } from "@/lib/scoring";
 import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
-import { lineDefinitions } from "@/lib/scoring";
-import type { FasciaLine } from "@/lib/types";
+import type { AnswerMap, ClinicConfig } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
 
 export default async function ResultPage({ params }: { params: { resultId: string } }) {
   const supabase = getSupabaseAdmin();
@@ -21,11 +25,11 @@ export default async function ResultPage({ params }: { params: { resultId: strin
 
   const { data } = await supabase
     .from("check_results")
-    .select("id, primary_line, secondary_line, scores_json, created_at, clinics(clinic_name, booking_url)")
+    .select("id, answers_json, created_at, clinics(id, slug, clinic_name, logo_url, theme_color, accent_color, booking_url, is_active)")
     .eq("id", params.resultId)
     .maybeSingle();
 
-  if (!data) {
+  if (!data?.answers_json) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-16">
         <div className="rounded-[28px] bg-white p-8 shadow-soft ring-1 ring-slate-200">
@@ -36,15 +40,25 @@ export default async function ResultPage({ params }: { params: { resultId: strin
     );
   }
 
-  const primary = lineDefinitions[data.primary_line as FasciaLine];
+  const clinicRow = Array.isArray(data.clinics) ? data.clinics[0] : data.clinics;
+  const clinic: ClinicConfig = clinicRow
+    ? {
+        id: clinicRow.id,
+        slug: clinicRow.slug,
+        clinicName: clinicRow.clinic_name,
+        logoUrl: clinicRow.logo_url,
+        themeColor: clinicRow.theme_color ?? "#14213D",
+        accentColor: clinicRow.accent_color ?? "#F59E0B",
+        bookingUrl: clinicRow.booking_url ?? "https://example.com/reservation",
+        isActive: Boolean(clinicRow.is_active)
+      }
+    : defaultClinic;
+
+  const result = scoreAnswers(data.answers_json as AnswerMap);
 
   return (
-    <main className="mx-auto max-w-2xl px-4 py-16">
-      <div className="rounded-[30px] bg-white p-8 shadow-soft ring-1 ring-slate-200">
-        <p className="mb-3 inline-flex rounded-full bg-amberline-100 px-3 py-1 text-xs font-bold text-navy-900">保存済み結果</p>
-        <h1 className="text-2xl font-black text-navy-900">{primary.resultTitle}</h1>
-        <p className="mt-4 text-sm leading-7 text-slate-700">{primary.description}</p>
-      </div>
+    <main className="px-4 py-10">
+      <ResultCard clinic={clinic} result={result} resultId={data.id} />
     </main>
   );
 }
