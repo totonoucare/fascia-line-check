@@ -24,13 +24,13 @@ export default function HomePage() {
             </div>
 
             <p className="mb-5 inline-flex rounded-full bg-amberline-100 px-4 py-2 text-xs font-bold text-navy-900">
-              治療院HP拡張ツール / MVP v0.1
+              治療院HP拡張ツール / MVP v0.2
             </p>
             <h2 className="text-4xl font-black leading-tight tracking-tight text-navy-950 sm:text-5xl">
               “なぜ全身を見るのか”が、予約前に伝わるチェック体験を。
             </h2>
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600">
-              肩こり・腰痛などの悩みを、痛い場所だけでなく、足・骨盤・背中・肩甲骨・首のつながりから見える化。予約システムを置き換えず、院のHPに診断型CVパーツを追加します。
+              肩こり・腰痛などの悩みを、主訴・動作チェック・生活背景から整理。表層後面・表層前面・側面・らせん・深部体幹・腕ラインを患者向けにわかりやすく翻訳します。予約システムを置き換えず、院のHPに診断型CVパーツを追加します。
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -56,7 +56,7 @@ export default function HomePage() {
             <div className="mt-8 rounded-[24px] bg-white p-5 text-navy-900">
               <p className="text-xs font-bold text-slate-500">埋め込み例</p>
               <pre className="mt-3 overflow-x-auto rounded-2xl bg-slate-50 p-4 text-xs leading-6 text-slate-700 ring-1 ring-slate-200">
-                {`<iframe\n  src="https://your-domain.com/embed/demo"\n  width="100%"\n  height="820"\n  style="border:0;border-radius:24px;"\n></iframe>`}
+                {`<iframe\n  src="https://your-domain.com/embed/demo"\n  width="100%"\n  height="980"\n  style="border:0;border-radius:24px;"\n></iframe>`}
               </pre>
             </div>
           </div>
