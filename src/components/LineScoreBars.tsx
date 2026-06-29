@@ -1,7 +1,7 @@
 import { lineDefinitions } from "@/lib/scoring";
 import type { FasciaLine } from "@/lib/types";
 
-const order: FasciaLine[] = ["back_line", "front_line", "lateral_line", "spiral_line", "arm_line"];
+const order: FasciaLine[] = ["back_line", "front_line", "lateral_line", "spiral_line", "deep_core_line", "arm_line"];
 
 export function LineScoreBars({ percentages, primaryLine }: { percentages: Record<FasciaLine, number>; primaryLine: FasciaLine }) {
   return (

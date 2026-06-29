@@ -61,7 +61,7 @@ export function CheckWidget({ clinic, embed = false }: { clinic: ClinicConfig; e
           clinicSlug: clinic.slug,
           sessionId,
           answers,
-          scores: scored.scores,
+          scores: scored.adjustedScores,
           primaryLine: scored.primaryLine,
           secondaryLine: scored.secondaryLine
         })
@@ -121,7 +121,7 @@ export function CheckWidget({ clinic, embed = false }: { clinic: ClinicConfig; e
               </div>
             </div>
             <span className="hidden rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80 ring-1 ring-white/15 sm:inline-flex">
-              約30秒
+              約1分
             </span>
           </div>
 
@@ -130,7 +130,7 @@ export function CheckWidget({ clinic, embed = false }: { clinic: ClinicConfig; e
               痛い場所だけでなく、体の“つながり”から見てみましょう。
             </p>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75">
-              肩こり・腰痛が戻りやすい人へ。いくつかの質問から、負担が集まりやすいラインの傾向をセルフチェックできます。
+              肩こり・腰痛が戻りやすい人へ。主訴・動作チェック・生活背景から、負担が集まりやすいラインの傾向をセルフチェックできます。
             </p>
           </div>
         </div>
